@@ -26,8 +26,22 @@ suite('UnitTests', () => {
     });
     test("Logic handles an invalid column placement",function(){
         assert.equal(solver.checkColPlacement(Strings.puzzlesAndSolutions[0][0],0,1,9),false);
-
-    })
+    });
+    test("Logic handles a valid region (3x3 grid) placement",function(){
+        assert.equal(solver.checkRegionPlacement(Strings.puzzlesAndSolutions[0][0],5,3,4),true);
+    });
+    test("Logic handles an invalid region (3x3 grid) placement",function(){
+        assert.equal(solver.checkRegionPlacement(Strings.puzzlesAndSolutions[0][0],8,8,9),false);
+    });
+    test("Valid puzzle strings pass the solver",function(){
+        assert.isString(solver.solve(Strings.puzzlesAndSolutions[0][0]));
+    });
+    test("Invalid puzzle strings fail the solver",function(){
+        assert.equal(solver.solve("some invalid puzzle"),false);
+    });
+    test("Solver returns the expected solution for an incomplete puzzle",function(){
+        assert.equal(solver.solve(Strings.puzzlesAndSolutions[0][0]),Strings.puzzlesAndSolutions[0][1]);
+    });
 });
 
 

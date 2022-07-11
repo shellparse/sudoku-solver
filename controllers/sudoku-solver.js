@@ -7,7 +7,7 @@ class SudokuSolver {
   checkRowPlacement(puzzleString, row, column, value) {
     let r = puzzleString.substr(row*9,9);
     let valueStr = value;
-    return !r.includes(valueStr)
+    return !r.includes(valueStr);
   }
 
   checkColPlacement(puzzleString, row, column, value) {
@@ -22,11 +22,35 @@ class SudokuSolver {
 
   checkRegionPlacement(puzzleString, row, column, value) {
     let region="";
-    
+    for(let i=0; i<3;i++){
+      region+=puzzleString.substr((((row-row%3)+i)*9)+(column-column%3),3);
+    }
+    return !region.includes(value.toString());
   }
 
   solve(puzzleString) {
-    
+    if(this.validate(puzzleString)){
+      let encounters=[];
+      let solution = puzzleString;
+      for (let index = 0; index < solution.length; index++) {
+        if(solution[i]==="."){
+          encounters.push(index);
+          let row = i-i%9;
+          let col = i%9;
+            if(this.checkRowPlacement(solution,row,col,1)&&this.checkColPlacement(solution,row,col,1),this.checkRegionPlacement(solution,row,col,1)){
+              solution[index].replace(".",1);
+            }else{
+              index=//find a way to check this
+            }
+          
+        }else if (encounters.includes(index)){
+
+        }
+      }
+      return "";
+    }else{
+      return false;
+    }
   }
 }
 
