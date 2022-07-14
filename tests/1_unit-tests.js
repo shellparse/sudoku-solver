@@ -63,7 +63,7 @@ suite('UnitTests', () => {
         assert.equal(solver.checkColPlacement(grid,0,1,3),true);
     });
     test("Logic handles an invalid column placement",function(){
-        assert.equal(solver.checkColPlacement(grid,0,1,9),false);
+        assert.equal(solver.checkColPlacement(grid,0,3,6),false);
     });
     test("Logic handles a valid region (3x3 grid) placement",function(){
         assert.equal(solver.checkRegionPlacement(grid,5,3,4),true);
