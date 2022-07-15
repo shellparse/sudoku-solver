@@ -68,7 +68,12 @@ class SudokuSolver {
                 console.log("reset i and j");
                 console.log(i,j);
                 workSpace[i][j]++;
-              }
+                if(workSpace[i][j]>9){
+                  i=memory[memory.findIndex((plc)=>plc[0]===i&&plc[1]===j)-1][0];
+                  j=memory[memory.findIndex((plc)=>plc[0]===i&&plc[1]===j)-1][1];
+                  workSpace[i][j]++;
+                }
+              } 
             }
           }//end of if to check is it blank or previous encounter if else then it will continue with the loop ;
         }
