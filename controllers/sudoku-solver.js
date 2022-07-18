@@ -41,6 +41,9 @@ class SudokuSolver {
     return !region.some((row)=>row.includes(value));
   }
 
+  isSafe(grid, row, column, value) {
+    return this.checkRowPlacement(grid,row,column,value)&&this.checkColPlacement(grid,row,column,value)&&this.checkRegionPlacement(grid,row,column,value)
+  }
 
   solve(grid) {
     if(this.validate(grid)){
@@ -57,7 +60,7 @@ class SudokuSolver {
             }// pushing to the memory the locations of all blank encounters
             if(workSpace[i][j]===0)workSpace[i][j]++; //to make sure that we are not checking against 0 for the first incremental run
             
-            while(!(this.checkRowPlacement(workSpace,i,j,workSpace[i][j])&&this.checkColPlacement(workSpace,i,j,workSpace[i][j])&&this.checkRegionPlacement(workSpace,i,j,workSpace[i][j]))){
+            while(!this.isSafe(workSpace,j,j,workSpace[i][j])){
               workSpace[i][j]++;
               if(workSpace[i][j]>9){
                 workSpace[i][j]=0;
@@ -69,9 +72,9 @@ class SudokuSolver {
                 console.log(i,j);
                 workSpace[i][j]++;
                 if(workSpace[i][j]>9){
+                  workSpace[i][j]++;
                   i=memory[memory.findIndex((plc)=>plc[0]===i&&plc[1]===j)-1][0];
                   j=memory[memory.findIndex((plc)=>plc[0]===i&&plc[1]===j)-1][1];
-                  workSpace[i][j]++;
                 }
               } 
             }
